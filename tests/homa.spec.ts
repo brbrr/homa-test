@@ -40,6 +40,19 @@ test('displays social media links in the footer', async ({ page }) => {
   await expect(page.locator('footer [href="https://www.facebook.com/homagames/"]')).toBeVisible();
   await expect(page.locator('footer [href="https://discord.io/homaacademy"]')).toBeVisible();
   await expect(page.locator('footer [href="https://www.tiktok.com/@homagames"]')).toBeVisible();
-});
+});   
+
+const socialLinks = [
+  {name: 'Facebook', url: 'https://www.facebook.com/homagames/'},
+  {name: 'Discord', url: 'https://discord.io/homaacademy'},
+  {name: 'TikTok', url: 'https://www.tiktok.com/@homagames'}
+];
+
+for (const {name, url} of socialLinks) {
+  test(`displays ${name} link in the footer`, async ({ page }) => {
+    await page.locator('footer').scrollIntoViewIfNeeded();
+    await expect(page.locator(`footer [href="${url}"]`)).toBeVisible();
+  });
+}
 
 
